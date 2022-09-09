@@ -16,7 +16,7 @@ export default function Home(){
         <section>
             {pokemons.length > 1
             ?
-            <div className="grid gap-4 md:grid-flow-row md:grid-cols-2 lg:grid-cols-3 place-content-center py-4">
+            <div className="grid gap-4 md:grid-flow-row md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-content-center py-4">
                 {pokemons.map((pokemon, index) => (
                     <PokemonCard data={pokemon} id={pokemon.id} key={`pokemon-${index}`}/>
                 ))}

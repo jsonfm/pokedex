@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 
 const PokemonCard = ({data}) => {
     console.log("data: ", data);
@@ -11,7 +13,7 @@ const PokemonCard = ({data}) => {
         types
     } = data;
     return(
-        <div className="shadow-md w-72 p-4 grid place-content-center">
+        <div className="shadow-md w-72 min-h-[250px] p-4 grid place-content-center">
            <img
             src={image}
             className="w-48"
@@ -36,6 +38,7 @@ const PokemonCard = ({data}) => {
                 <div className="bg-rose-600 rounded-full px-4 py-1 text-white capitalize">{tag.type.name}</div>
             ))}
            </div>
+           <Link to={`/pokedex/detail/${data.id}`}>Details {`>>`}</Link>
         </div>
     )
 }

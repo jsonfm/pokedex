@@ -13,4 +13,12 @@ export default class PokemonService {
         const pokemons = await Promise.all(data.results.map(result => fetch(result.url).then(res => res.json())));
         return pokemons;
     }
+
+    async getPokemon(id=1){
+        const data = await fetch(`${this.api}/${id}`).then(res => res.json());
+        return data;
+    }
+
+
+
 }
