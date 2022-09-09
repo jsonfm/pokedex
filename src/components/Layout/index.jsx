@@ -7,7 +7,7 @@ export default function Layout({children}){
     return(
         <>
             <Header />
-            <main className="container min-h-screen px-4">
+            <main className="container min-h-screen px-4 pt-16">
                 {children}
             </main>
             <Footer/>

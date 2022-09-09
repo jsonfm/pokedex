@@ -9,7 +9,7 @@ Is available [Here](https://jsonfm.github.io/pokedex/).
 npm run dev
 ```
 
-## deployment
+## Deployment
 ```
 npm run deploy
 ```
