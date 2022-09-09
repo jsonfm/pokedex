@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 
 
 const PokemonCard = ({data}) => {
-    console.log("data: ", data);
-    const {front_default: image} = data.sprites;
+
+    const {
+        front_default,
+        back_default    
+    } = data.sprites;
+
     const {
         name,
         height,
@@ -12,12 +16,15 @@ const PokemonCard = ({data}) => {
         weight,
         types
     } = data;
+
     return(
         <div className="shadow-md w-72 min-h-[250px] p-4 grid place-content-center">
-           <img
-            src={image}
-            className="w-48"
-           />
+            <div className="flex flex-col">
+                <img
+                    src={front_default}
+                    className="w-48"
+                />
+            </div>
            <p className="font-bold text-center text-xl capitalize mb-2">{name}</p>
            <div className="flex gap-3 mb-4">
                 <div className="flex flex-col items-center">
@@ -35,10 +42,10 @@ const PokemonCard = ({data}) => {
            </div>
            <div className="flex flex-wrap gap-4 justify-center my-2">
             {types.map((tag, index) => (
-                <div className="bg-rose-600 rounded-full px-4 py-1 text-white capitalize">{tag.type.name}</div>
+                <div className="bg-rose-600 rounded-full px-4 py-1 text-white capitalize" key={`tag-${index}`}>{tag.type.name}</div>
             ))}
            </div>
-           <Link to={`/pokedex/detail/${data.id}`}>Details {`>>`}</Link>
+           <Link className="text-center hover:text-rose-600 my-2" to={`/pokedex/detail/${data.id}`}>Details {`>>`}</Link>
         </div>
     )
 }

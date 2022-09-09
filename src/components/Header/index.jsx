@@ -16,7 +16,7 @@ export default function Header(){
                 <ul className={`ease-in duration-300 ${showMenu ? 'left-0' :'-left-[110%]'} bg-rose-600 absolute top-16 h-screen w-2/3 px-4 py-5 text-xl`}>
                     <li>Pokemons</li>
                 </ul>
-                <div className="text-2xl" onClick={toggleMenu}>
+                <div className="text-2xl hover:cursor-pointer" onClick={toggleMenu}>
                     <GiHamburgerMenu/>
                 </div>
             </nav>

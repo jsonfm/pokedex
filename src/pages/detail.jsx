@@ -24,22 +24,47 @@ export default function Detail(){
         moves 
     } = pokemonData;
 
-    const image = pokemonData?.sprites?.front_default;
+    const front_default = pokemonData?.sprites?.front_default;
+    const back_default = pokemonData?.sprites?.back_default;
+    const back_shiny = pokemonData?.sprites?.back_shiny;
+    const front_shiny = pokemonData?.sprites?.front_shiny;
+    // const {
+    //     back_default    
+    // } = pokemonData.sprites;
 
-    console.log(types);
+    console.log("dat: ", pokemonData);
     
     return(
         <section className="py-12">
             <p className="uppercase mb-6 md:mb-12 text-xl text-center">Pokemon Detail</p>
             <div className="container flex flex-col md:flex-row">
-                <div className="w-full flex items-center justify-center mb-4">
-                    <img
-                        src={image}
-                        className="h-48"
-                    />
+                <div className="w-full flex items-center justify-center mb-4 gap-2">
+                <div className="flex flex-col">
+                    <div className="flex justify-center border">
+                        <img
+                            src={front_default}
+                            className="w-48"
+                        />
+                    </div>
+                    <div className="flex">
+                        <img
+                            src={back_default}
+                            className="w-1/3 h-32 border"
+                        />
+                        <img
+                            src={front_shiny}
+                            className="w-1/3 h-32 border"
+                        />
+                        <img
+                            src={back_shiny}
+                            className="w-1/3 h-32 border"
+                        />
+                    </div>
+                    <button className="bg-rose-600 text-white px-3 py-2 w-1/2 mt-4 hover:bg-white hover:text-rose-600 hover:border hover:border-rose-600 mx-auto linear duration-200">Catch</button>
                 </div>
-                <div className="w-full flex flex-col mb-4 min-h-[250px]">
-                    <p className="font-bold text-xl mb-4">General Info</p>
+                </div>
+                <div className="w-full flex flex-col mb-4 min-h-[250px] md:px-4">
+                    <p className="font-bold text-xl mb-4 uppercase text-gray-800">General Info</p>
                     <div className="flex gap-4 my-2">
                         <p className="font-bold w-1/3">Name</p>
                         <p className="w-2/3">{name}</p>
@@ -69,16 +94,18 @@ export default function Detail(){
                         <p className="w-2/3">{experience}</p>
                     </div>
                 </div>
-                <div className="w-full flex flex-col gap-3 min-h-[250px] max-h-[300px] overflow-y-auto">
-                    <p className="font-bold text-xl mb-4">Moves</p>
+                <div className="w-full flex flex-col gap-3 min-h-[250px] max-h-[300px]">
+                    <p className="font-bold text-xl mb-4 uppercase text-gray-800">Moves</p>
+                    <div className="flex flex-col gap-3 overflow-y-auto">
                     {!!moves 
                     ? <>
                         {moves.map((move, index) => (
-                            <div className="capitalize">{move.move.name}</div>
+                            <div className="capitalize" key={`move-${index}`}>{move.move.name}</div>
                         ))}
                         </>
                     : <p>Loading</p> 
                     }
+                    </div>
                 </div>
             </div>
         </section>
