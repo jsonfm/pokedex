@@ -1,9 +1,19 @@
+// React
 import React from "react";
+
+// Others
+import { useSelector, useDispatch } from "react-redux";
+
+// Services
 import PokemonService from "@/services/pokemon";
-import PokemonCard from "@/components/PokemonCard";
+
+// Components
+import { PokemonsList }from "@/components/PokemonsList";
+
+// Actions
 import { setPokemons } from "@/actions";
 
-import { useSelector, useDispatch } from "react-redux";
+
 
 
 function Home(){
@@ -11,6 +21,7 @@ function Home(){
     const dispatch = useDispatch();
 
     const pokemonService = new PokemonService();
+
     React.useEffect(() => {
         const fetchPokemons = async () => {
             const response = await pokemonService.getAllPokemonsFull();
@@ -21,21 +32,10 @@ function Home(){
 
     return(
         <section>
-
             <div className="mx-auto max-w-[600px] my-12 text-center">
-                <input type="search" placeholder="Search..." className="input w-full max-w-xs border-b-2" />
+                <input type="search" placeholder="Search..." className="input input-bordered w-full max-w-xs" />
             </div>
-
-            {pokemons.length > 1
-            ?
-            <div className="grid gap-4 md:grid-flow-row md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-content-center py-4">
-                {pokemons.map((pokemon, index) => (
-                    <PokemonCard data={pokemon} id={pokemon.id} key={`pokemon-${index}`}/>
-                ))}
-            </div>
-            :
-            <p>Loading</p>
-            }
+            <PokemonsList pokemons={pokemons} />
         </section>
     )
     

@@ -19,3 +19,4 @@ npm run deploy
  - ReactJS
  - TailwindCSS
  - Pokemon API
+ - React Redux

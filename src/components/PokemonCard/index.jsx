@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 
-const PokemonCard = ({data}) => {
+export const PokemonCard = ({ data }) => {
 
     const {
         front_default,
@@ -18,7 +18,15 @@ const PokemonCard = ({data}) => {
     } = data;
 
     return(
-        <div className="shadow-md w-72 min-h-[250px] p-4 grid place-content-center">
+        <div className="shadow-xl w-72 min-h-[250px] p-4 grid place-content-center">
+            <div className="flex flex-row-reverse">
+                <div className="form-control w-full">
+                    <label className="label cursor-pointer">
+                        <span className="label-text text-gray-500">Normal</span>
+                        <input type="checkbox" className="toggle" />
+                    </label>
+                </div>
+            </div>
             <div className="flex flex-col">
                 <img
                     src={front_default}
@@ -49,4 +57,3 @@ const PokemonCard = ({data}) => {
         </div>
     )
 }
-export default PokemonCard;
