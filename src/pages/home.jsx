@@ -23,7 +23,7 @@ function Home(){
         <section>
 
             <div className="mx-auto max-w-[600px] my-12 text-center">
-                <input type="search" placeholder="Search..." class="input w-full max-w-xs" />
+                <input type="search" placeholder="Search..." className="input w-full max-w-xs border-b-2" />
             </div>
 
             {pokemons.length > 1
