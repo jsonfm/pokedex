@@ -15,7 +15,6 @@ import { setPokemons } from "@/actions";
 
 
 
-
 function Home(){
     const pokemons = useSelector(state => state.pokemons);
     const dispatch = useDispatch();

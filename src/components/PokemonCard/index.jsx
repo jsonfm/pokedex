@@ -18,7 +18,7 @@ export const PokemonCard = ({ data }) => {
     } = data;
 
     return(
-        <div className="shadow-xl w-72 min-h-[250px] p-4 grid place-content-center">
+        <div className="shadow-xl w-72 min-h-[250px] p-4 grid place-content-center transition ease-in-out delay-150">
             <div className="flex flex-row-reverse">
                 <div className="form-control w-full">
                     <label className="label cursor-pointer">
@@ -30,7 +30,7 @@ export const PokemonCard = ({ data }) => {
             <div className="flex flex-col">
                 <img
                     src={front_default}
-                    className="w-48"
+                    className="w-48 h-56"
                 />
             </div>
            <p className="font-bold text-center text-xl capitalize mb-2">{name}</p>
