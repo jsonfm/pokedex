@@ -1,6 +1,11 @@
 ## React Pokemon App
 A Pokedex app powered with Vite, React.js and TailwindCSS.
 
+<img
+    src="./docs/images/pokedex.jpeg"
+/>
+
+
 ## Live Demo
 Is available [Here](https://jsonfm.github.io/pokedex/).
 
