@@ -8,49 +8,41 @@ import { useSelector, useDispatch } from "react-redux";
 import { pokemonService } from "@/services/pokemon";
 
 // Components
-import { PokemonsList } from "../components/PokemonsList";
+import { PokemonsList } from "@/components/PokemonsList";
+import { SearchBar } from "@/components/SearchBar";
 
 // Actions
-import { setPokemons, appendPokemons, setPokemonFilter, setPage } from "@/actions";
+import { setPokemons, appendPokemons, setPage } from "@/actions";
+// import { Skeleton } from "../components/Skeleton";
 
 
 function Home(){
 
     const { pokemons, filtered, filter, page } = useSelector(state => state);
-
     const dispatch = useDispatch();
 
-    const fetchPokemons = async (first=true) => {
-        const response = await pokemonService.getPaginatedPokemons(first ? 1 : page);
-        const { results } = response;
-        first ? dispatch(setPokemons(results)) : dispatch(appendPokemons(results));
+    const fetchPokemons = async () => {
+        const { results }= await pokemonService.getPaginatedPokemons(page);
+        page === 1 ? dispatch(setPokemons(results)) : dispatch(appendPokemons(results));
         dispatch(setPage(page + 1));
-        console.log("page:: ", page);
     }
 
     React.useEffect(() => {
         fetchPokemons();
     }, []);
 
-
-    const applyfilter = (e) => {
-        const search = e.target.value;
-        dispatch(setPokemonFilter(search));
-    }
-
     const list = filter.length > 0 ? filtered : pokemons;
 
     return(
         <section>
-            <div className="mx-auto max-w-[600px] my-12 text-center">
-                <input onChange={applyfilter} type="search" placeholder="Search..." className="outline-none h-12 border px-4 min-w-[300px]" />
-            </div>
-
+            <SearchBar />
             <PokemonsList 
+                filter={filter}
                 pokemons={list} 
                 fetchPokemons={fetchPokemons} 
-                hasMore={true} 
+                hasMore={filter.length < 1} 
             />
+            {/* <Skeleton /> */}
         </section>
     )
     

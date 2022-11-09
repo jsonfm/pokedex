@@ -18,7 +18,7 @@ export const PokemonCard = ({ data }) => {
     } = data;
 
     return(
-        <Link to={`/pokedex/detail/${data.id}`} className="shadow-xl w-72 min-h-[250px] p-4 grid place-content-center transition ease-in-out delay-150">
+        <Link to={`/pokedex/detail/${data.id}`} className="shadow-xl w-64 min-h-[250px] p-4 grid place-content-center transition ease-in-out delay-150">
             {/* <div className="flex flex-row-reverse">
                 <div className="form-control w-full">
                     <label className="label cursor-pointer">
