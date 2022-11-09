@@ -43,7 +43,7 @@ export default function Detail(){
     
     return(
         <section className="">
-            <div className="mt-12 mb-24 cursor-pointer " onClick={() => navigate("/pokedex/")}>
+            <div className="mt-12 mb-24 cursor-pointer " onClick={() => navigate("/")}>
                 <UilPrevious className="scale-[1.8] hover:scale-[2] duration-100"/>
             </div>
             <div className="container flex flex-col md:flex-row">

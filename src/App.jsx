@@ -11,9 +11,9 @@ const App = () => {
   return (
     <Layout>
       <Routes>
-        <Route path="/pokedex/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/pokedex/dx/" element={<Pokedex />} />
-        <Route path="/pokedex/detail/:id" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
