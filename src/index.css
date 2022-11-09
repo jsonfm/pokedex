@@ -4,6 +4,10 @@
 @tailwind utilities;
 
 
+:root {
+  --red: #FD0400;
+}
+
 html, body {
   font-family: 'Poppins', sans-serif;
 }

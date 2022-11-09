@@ -1,23 +1,26 @@
 import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import { PokemonCard } from "@/components/PokemonCard";
 import { Skeleton } from "@/components/Skeleton";
 
 
-export const PokemonsList = (props) => {
-    const pokemons = props.pokemons || [];
+export const PokemonsList = ({ pokemons, fetchPokemons }) => {
+
     return(
         <>
-        {pokemons.length > 1
-            ?
-            <div className="grid gap-4 md:grid-flow-row md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-content-center py-4 transition ease-in-out delay-150">
-                {pokemons.map((pokemon, index) => (
-                    <PokemonCard data={pokemon} id={pokemon.id} key={`pokemon-${index}`}/>
+            <InfiniteScroll
+                next={async () => await fetchPokemons(false)}
+                dataLength={pokemons.length}
+                loader={<Skeleton/>}
+                hasMore={true}
+            >
+                <div className="flex flex-wrap gap-1 justify-center">
+                {pokemons?.map(pokemon =>(
+                    <PokemonCard data={pokemon}/>
                 ))}
-            </div>
-            :
-            <Skeleton />
-        }
+                </div>
+            </InfiniteScroll>
         </>
     )
 }

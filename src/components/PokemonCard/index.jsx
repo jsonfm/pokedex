@@ -18,15 +18,15 @@ export const PokemonCard = ({ data }) => {
     } = data;
 
     return(
-        <div className="shadow-xl w-72 min-h-[250px] p-4 grid place-content-center transition ease-in-out delay-150">
-            <div className="flex flex-row-reverse">
+        <Link to={`/pokedex/detail/${data.id}`} className="shadow-xl w-72 min-h-[250px] p-4 grid place-content-center transition ease-in-out delay-150">
+            {/* <div className="flex flex-row-reverse">
                 <div className="form-control w-full">
                     <label className="label cursor-pointer">
                         <span className="label-text text-gray-500">Normal</span>
                         <input type="checkbox" className="toggle" />
                     </label>
                 </div>
-            </div>
+            </div> */}
             <div className="flex flex-col">
                 <img
                     src={front_default}
@@ -53,7 +53,6 @@ export const PokemonCard = ({ data }) => {
                 <div className="bg-rose-600 rounded-full px-4 py-1 text-white capitalize" key={`tag-${index}`}>{tag.type.name}</div>
             ))}
            </div>
-           <Link className="text-center hover:text-rose-600 my-2" to={`/pokedex/detail/${data.id}`}>Details {`>>`}</Link>
-        </div>
+        </Link>
     )
 }

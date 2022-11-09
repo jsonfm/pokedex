@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export default function Layout({children}){
     return(
         <>
-            <Header />
+            {/* <Header /> */}
             <main className="container min-h-screen px-4 pt-16">
                 {children}
             </main>

@@ -14,6 +14,10 @@ export default class PokemonService {
         return response;
     }
 
+    async completePokemonsResult(data){
+        return await Promise.all(data.results.map(result => fetch(result.url).then(res => res.json())));
+    }
+
     /**
      * Returns a list of Pokemons with full detailed info
      * @param {number} limit 
@@ -21,9 +25,21 @@ export default class PokemonService {
      * @returns 
      */
     async getAllPokemonsFull(limit=12, offset=12){
-        const data = await this.getAllPokemons(limit, offset);
-        const pokemons = await Promise.all(data.results.map(result => fetch(result.url).then(res => res.json())));
-        return pokemons;
+        const response = await this.getAllPokemons(limit, offset);
+        const results = await this.completePokemonsResult(response);
+        return {
+            ...response,
+            results
+        }
+    }
+
+    async getPokemonsFromURL(url){
+        const response = await fetch(url).then(res => res.json())
+        const results = await this.completePokemonsResult(response);
+        return {
+            ...response,
+            results
+        }
     }
 
     /**
@@ -34,7 +50,6 @@ export default class PokemonService {
     async getPokemon(id=1){
         return await fetch(`${this.api}/${id}`).then(res => res.json());
     }
-
-
-
 }
+
+export const pokemonService = new PokemonService();

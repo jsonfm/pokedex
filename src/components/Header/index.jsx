@@ -19,7 +19,7 @@ export default function Header(){
    }, []);
 
     return(
-        <header className={` ${shadow ? 'shadow-md': ''} ease-linear duration-100 bg-white text-gray-500 fixed w-full`}>
+        <header className={` ${shadow ? 'shadow-sm': ''} ease-linear duration-100 bg-white text-gray-500 fixed w-full`}>
             <nav className="container h-16 px-4 flex items-center justify-between">
                 <Link to="/pokedex/" className="text-2xl">Pokedex</Link>
                 <ul className={`ease-in duration-300 ${showMenu ? 'left-0' :'-left-[110%]'} bg-white absolute top-16 h-screen w-2/3 px-4 py-5 text-base lg:h-auto lg:w-auto lg:relative lg:top-0 lg:py-0 lg:left-0`}>

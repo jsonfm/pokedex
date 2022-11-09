@@ -7,6 +7,7 @@ import { pokemonsReducer } from "./reducers/pokemons";
 import { Provider } from "react-redux";
 import { legacy_createStore as createStore, compose, applyMiddleware} from "redux";
 
+
 import { logger } from "./middlewares";
 
 const composedEnhancers = compose(
