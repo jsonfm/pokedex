@@ -13,7 +13,8 @@ import { SearchBar } from "@/components/SearchBar";
 
 // Actions
 import { setPokemons, appendPokemons, setPage } from "@/actions";
-// import { Skeleton } from "../components/Skeleton";
+
+import { PokedexIcon } from "@/icons/PokedexIcon";
 
 
 function Home(){
@@ -35,6 +36,7 @@ function Home(){
 
     return(
         <section>
+            <PokedexIcon height="120px" className="mx-auto"/>
             <SearchBar />
             <PokemonsList 
                 filter={filter}
