@@ -1,20 +1,29 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import PokemonService from '@/services/pokemon';
+import { useParams, useNavigate } from 'react-router-dom';
+import { pokemonService } from '@/services/pokemon';
 import { TagList } from "@/components/TagList";
+import { UilPrevious } from '@iconscout/react-unicons';
 
-const pokemonService = new PokemonService()
 
 export default function Detail(){
+    const navigate = useNavigate();
     const [pokemonData, setPokemonData] = React.useState({});
     const { id } = useParams();
 
+    const fetchPokemonData = async () => {
+        const response = await pokemonService.getPokemon(id);
+        setPokemonData(response);
+    }
+
     React.useEffect(() => {
-        pokemonService.getPokemon(id)
-        .then(res => setPokemonData(res));
+        window.scrollTo(0, 0);
+        fetchPokemonData();
     }, [])
 
     
+    if(!pokemonData.sprites)
+        return null
+
     const { 
         name,
         types,
@@ -24,23 +33,23 @@ export default function Detail(){
         moves 
     } = pokemonData;
 
-    const front_default = pokemonData?.sprites?.front_default;
-    const back_default = pokemonData?.sprites?.back_default;
-    const back_shiny = pokemonData?.sprites?.back_shiny;
-    const front_shiny = pokemonData?.sprites?.front_shiny;
-    // const {
-    //     back_default    
-    // } = pokemonData.sprites;
+    const {
+        front_default,
+        back_default,
+        back_shiny,
+        front_shiny
+    } = pokemonData.sprites;
 
-    console.log("dat: ", pokemonData);
     
     return(
-        <section className="py-12 lg:py-24">
-            {/* <p className="uppercase mb-6 md:mb-12 lg:mb-24 text-xl text-center">Pokemon Detail</p> */}
+        <section className="">
+            <div className="mt-12 mb-24 cursor-pointer " onClick={() => navigate("/pokedex/")}>
+                <UilPrevious className="scale-[1.8] hover:scale-[2] duration-100"/>
+            </div>
             <div className="container flex flex-col md:flex-row">
                 <div className="w-full flex items-center justify-center mb-4 gap-2">
                 <div className="flex flex-col mb-4">
-                    <div className="flex justify-center shadow-md">
+                    <div className="flex justify-center shadow-md rounded-md">
                         <img
                             src={front_default}
                             className="w-48 h-48 object-cover"
@@ -49,18 +58,18 @@ export default function Detail(){
                     <div className="flex mt-4">
                         <img
                             src={back_default}
-                            className="w-28 h-32object-cover shadow "
+                            className="w-28 h-32object-cover shadow rounded-md"
                         />
                         <img
                             src={front_shiny}
-                            className="w-28 h-32 object-cover shadow"
+                            className="w-28 h-32 object-cover shadow rounded-md"
                         />
                         <img
                             src={back_shiny}
-                            className="w-28 h-32 object-cover shadow"
+                            className="w-28 h-32 object-cover shadow rounded-md"
                         />
                     </div>
-                    <button className="bg-rose-600 text-white px-3 py-2 w-1/2 mt-4 hover:bg-white hover:text-rose-600 hover:border hover:border-rose-600 mx-auto linear duration-200">Catch</button>
+                    <button className="bg-rose-600 text-white px-3 py-2 w-1/2 mt-4 hover:bg-white hover:text-rose-600 hover:border hover:border-rose-600 mx-auto linear duration-200 rounded-md">Catch</button>
                 </div>
                 </div>
                 <div className="w-full flex flex-col mb-4 min-h-[250px] md:px-4 lg:px-12">
