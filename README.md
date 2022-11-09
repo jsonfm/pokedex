@@ -4,17 +4,17 @@ A Pokedex app powered with Vite, React.js and TailwindCSS.
 ## Live Demo
 Is available [Here](https://jsonfm.github.io/pokedex/).
 
-## Run
+### Run
 ```
 npm run dev
 ```
 
-## Deployment
+### Deployment
 ```
 npm run deploy
 ```
 
-## Techonologies
+### Technologies
  - ViteJS
  - ReactJS
  - TailwindCSS

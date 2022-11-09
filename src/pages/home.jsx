@@ -5,30 +5,27 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Services
-import {pokemonService} from "@/services/pokemon";
+import { pokemonService } from "@/services/pokemon";
 
 // Components
 import { PokemonsList } from "../components/PokemonsList";
 
 // Actions
-import { setPokemons, appendPokemons, setPokemonFilter } from "@/actions";
+import { setPokemons, appendPokemons, setPokemonFilter, setPage } from "@/actions";
 
 
 function Home(){
-    // let filtered = [];
-    const pokemons = useSelector(state => state.pokemons);
+
+    const { pokemons, filtered, filter, page } = useSelector(state => state);
+
     const dispatch = useDispatch();
 
     const fetchPokemons = async (first=true) => {
-        const response = await pokemonService.getAllPokemonsFull();
-
-        if(first){
-            dispatch(setPokemons(response.results));
-        }else{   
-            const values = await pokemonService.getPokemonsFromURL(response.next)
-            dispatch(appendPokemons(values.results));
-        }   
-        // filtered = [...pokemons];
+        const response = await pokemonService.getPaginatedPokemons(first ? 1 : page);
+        const { results } = response;
+        first ? dispatch(setPokemons(results)) : dispatch(appendPokemons(results));
+        dispatch(setPage(page + 1));
+        console.log("page:: ", page);
     }
 
     React.useEffect(() => {
@@ -36,20 +33,24 @@ function Home(){
     }, []);
 
 
-    const filter = (e) => {
+    const applyfilter = (e) => {
         const search = e.target.value;
         dispatch(setPokemonFilter(search));
-        // filtered = pokemons.find(pokemon => pokemon.toLowerCase().includes(search.toLowerCase()));
     }
 
+    const list = filter.length > 0 ? filtered : pokemons;
 
     return(
         <section>
             <div className="mx-auto max-w-[600px] my-12 text-center">
-                <input onChange={filter} type="search" placeholder="Search..." className="outline-none h-12 border px-4 min-w-[300px]" />
+                <input onChange={applyfilter} type="search" placeholder="Search..." className="outline-none h-12 border px-4 min-w-[300px]" />
             </div>
 
-            <PokemonsList pokemons={pokemons} fetchPokemons={fetchPokemons}/>
+            <PokemonsList 
+                pokemons={list} 
+                fetchPokemons={fetchPokemons} 
+                hasMore={true} 
+            />
         </section>
     )
     

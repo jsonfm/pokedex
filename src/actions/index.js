@@ -18,3 +18,16 @@ export const setPokemonFilter = (payload) => ({
     payload,
 });
 
+
+export const setFiltered = (payload) => ({
+    type: actionTypes.SET_FILTERED,
+    payload,
+});
+
+
+export const setPage = (payload) => ({
+    type: actionTypes.SET_PAGE,
+    payload,
+})
+
+

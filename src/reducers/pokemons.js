@@ -3,6 +3,8 @@ import { actionTypes } from "@/actions/types";
 const initialState = {
     pokemons: [],
     filter: "",
+    filtered: [],
+    page: 1,
 }
 
 export const pokemonsReducer = (state = initialState, action) => {
@@ -13,10 +15,21 @@ export const pokemonsReducer = (state = initialState, action) => {
             return {...state, pokemons: payload}
 
         case actionTypes.APPEND_POKEMONS:
-            return {...state, pokemons: state.pokemons.concat(payload)}
+            return {...state, pokemons: [...state.pokemons, ...payload]}
 
         case actionTypes.SET_POKEMON_FILTER:
-            return {...state, filter: payload}
+            const filtered = state.pokemons.filter(({name}) => name.toLowerCase().includes(payload.toLowerCase()))
+            return {
+                ...state, 
+                filtered,
+                filter: payload
+            }
+
+        case actionTypes.SET_FILTERED:
+            return {...state, filtered: payload}
+
+        case actionTypes.SET_PAGE:
+            return {...state, page: payload }
 
         default:
             return state;

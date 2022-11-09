@@ -42,6 +42,10 @@ export default class PokemonService {
         }
     }
 
+    async getPaginatedPokemons(page=1, limit=12, offset=12){
+        return await this.getAllPokemonsFull(limit, page * offset);
+    }
+
     /**
      * Returns a single Pokemon info given an id
      * @param {number} id 
