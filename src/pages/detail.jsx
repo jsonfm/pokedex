@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import PokemonService from '@/services/pokemon';
-
+import { TagList } from "@/components/TagList";
 
 const pokemonService = new PokemonService()
 
@@ -72,13 +72,7 @@ export default function Detail(){
                     <div className="flex gap-4 my-2">
                         <p className="font-bold w-1/3">Type</p>
                         <div className="flex flex-wrap gap-3 w-2/3">
-                            {!!types &&
-                            <>
-                            {types.map((tag, index) => (
-                                <div className="bg-rose-600 px-2 py-1 text-white rounded-full">{tag.type.name}</div>
-                            ))}
-                            </>
-                            }
+                            <TagList tags={types}/>
                         </div>
                     </div>
                     <div className="flex gap-4 my-2">

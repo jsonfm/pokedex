@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { tagBackground, tagColor } from "./colors";
+import { TagList } from "@/components/TagList";
 
 
 export const PokemonCard = ({ data }) => {
@@ -19,7 +19,7 @@ export const PokemonCard = ({ data }) => {
     } = data;
 
     return(
-        <Link to={`/pokedex/detail/${data.id}`} className="shadow-xl w-64 min-h-[250px] p-4 grid place-content-center transition ease-in-out delay-150">
+        <Link to={`/pokedex/detail/${data.id}`} className="rounded-md shadow-xl w-64 min-h-[250px] p-4 grid place-content-center transition ease-in-out delay-150">
             <div className="flex flex-col">
                 <img
                     src={front_default}
@@ -41,14 +41,15 @@ export const PokemonCard = ({ data }) => {
                     <p>{experience}</p>
                 </div>
            </div>
-           <div className="flex flex-wrap gap-4 justify-center my-2">
+           {/* <div className="flex flex-wrap gap-4 justify-center my-2">
             {types.map((tag, index) =>{
                 const name = tag.type.name;
                 const color = tagColor[name];
                 const background = tagBackground[name];
                 return <div className={`${background} ${color} px-4 py-1 capitalize`} key={`tag-${index}`}>{tag.type.name}</div>
             })}
-           </div>
+           </div> */}
+           <TagList tags={types} />
         </Link>
     )
 }
