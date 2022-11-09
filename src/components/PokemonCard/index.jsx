@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { tagBackground, tagColor } from "./colors";
 
 
 export const PokemonCard = ({ data }) => {
@@ -19,14 +20,6 @@ export const PokemonCard = ({ data }) => {
 
     return(
         <Link to={`/pokedex/detail/${data.id}`} className="shadow-xl w-64 min-h-[250px] p-4 grid place-content-center transition ease-in-out delay-150">
-            {/* <div className="flex flex-row-reverse">
-                <div className="form-control w-full">
-                    <label className="label cursor-pointer">
-                        <span className="label-text text-gray-500">Normal</span>
-                        <input type="checkbox" className="toggle" />
-                    </label>
-                </div>
-            </div> */}
             <div className="flex flex-col">
                 <img
                     src={front_default}
@@ -49,9 +42,12 @@ export const PokemonCard = ({ data }) => {
                 </div>
            </div>
            <div className="flex flex-wrap gap-4 justify-center my-2">
-            {types.map((tag, index) => (
-                <div className="bg-rose-600 rounded-full px-4 py-1 text-white capitalize" key={`tag-${index}`}>{tag.type.name}</div>
-            ))}
+            {types.map((tag, index) =>{
+                const name = tag.type.name;
+                const color = tagColor[name];
+                const background = tagBackground[name];
+                return <div className={`${background} ${color} px-4 py-1 capitalize`} key={`tag-${index}`}>{tag.type.name}</div>
+            })}
            </div>
         </Link>
     )
